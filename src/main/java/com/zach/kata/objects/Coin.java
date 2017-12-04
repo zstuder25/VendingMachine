@@ -10,6 +10,8 @@ public class Coin {
     public Coin(double weight, double diameter) {
         if(weight == 2.5 && diameter == 0.75){
             setCoinName("Penny");
+        }else if(weight == 5.0 && diameter == 0.835){
+            setCoinName("Nickel");
         }
     }
 

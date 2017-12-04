@@ -18,7 +18,14 @@ public class CoinTest {
 
     @Test
     public void makeAPennyTest(){
-        Coin coin = new Coin(2.5, 0.75);
-        assertEquals("Penny", coin.getCoinName());
+        Coin penny = new Coin(2.5, 0.75);
+        assertEquals("Penny", penny.getCoinName());
     }
+
+    @Test
+    public void makeANickelTest(){
+        Coin nickel = new Coin(5.0, 0.835);
+        assertEquals("Nickel", nickel.getCoinName());
+    }
+
 }
