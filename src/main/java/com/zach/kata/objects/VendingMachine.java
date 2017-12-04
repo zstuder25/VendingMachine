@@ -18,6 +18,6 @@ public class VendingMachine {
         }else if(coin.getCoinWeight() == QUARTER_W && coin.getCoinDiameter() == QUARTER_D){
             return "$0.25";
         }
-        return "";
+        return "INSERT COIN";
     }
 }

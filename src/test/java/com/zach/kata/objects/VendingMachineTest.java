@@ -13,7 +13,7 @@ public class VendingMachineTest {
     @Test
     public void acceptCoinTest(){
         VendingMachine vendingMachine = new VendingMachine();
-        assertEquals("", vendingMachine.insertCoin(new Coin(0, 0)));
+        assertEquals("INSERT COIN", vendingMachine.insertCoin(new Coin(0, 0)));
     }
 
     @Test
@@ -32,5 +32,11 @@ public class VendingMachineTest {
     public void insertValidCoinQuarter(){
         VendingMachine vendingMachine = new VendingMachine();
         assertEquals("$0.25", vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D)));
+    }
+
+    @Test
+    public void insertInvalidCoinPenny(){
+        VendingMachine vendingMachine = new VendingMachine();
+        assertEquals("INSERT COIN", vendingMachine.insertCoin(new Coin(PENNY_W, PENNY_D)));
     }
 }
