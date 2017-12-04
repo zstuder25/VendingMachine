@@ -2,9 +2,15 @@ package com.zach.kata.objects;
 
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 
-import static com.zach.kata.constants.Constants.Coin.*;
+import static com.zach.kata.constants.Constants.Coin.DIME_D;
+import static com.zach.kata.constants.Constants.Coin.DIME_W;
+import static com.zach.kata.constants.Constants.Coin.NICKEL_D;
+import static com.zach.kata.constants.Constants.Coin.NICKEL_W;
+import static com.zach.kata.constants.Constants.Coin.QUARTER_D;
+import static com.zach.kata.constants.Constants.Coin.QUARTER_W;
 import static com.zach.kata.constants.Constants.VendingMachine.INSERT_COIN;
 
 /**
@@ -14,6 +20,7 @@ public class VendingMachine {
 
     private double currentAmount = 0;
     private static NumberFormat formatter =  NumberFormat.getCurrencyInstance(new Locale("en", "US"));
+    private static ArrayList<Coin> rejectedCoins = new ArrayList<Coin>();
 
     private String convertAmount(){
         return formatter.format(currentAmount);
@@ -29,7 +36,13 @@ public class VendingMachine {
         }else if(coin.getCoinWeight() == QUARTER_W && coin.getCoinDiameter() == QUARTER_D){
             currentAmount += 0.25;
             return convertAmount();
+        }else{
+            rejectedCoins.add(coin);
+            return INSERT_COIN;
         }
-        return INSERT_COIN;
+    }
+
+    public ArrayList<Coin> getRejectedCoins() {
+        return rejectedCoins;
     }
 }
