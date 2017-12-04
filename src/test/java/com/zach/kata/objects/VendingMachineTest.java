@@ -2,8 +2,7 @@ package com.zach.kata.objects;
 
 import org.junit.Test;
 
-import static com.zach.kata.constants.Constants.Coin.NICKEL_D;
-import static com.zach.kata.constants.Constants.Coin.NICKEL_W;
+import static com.zach.kata.constants.Constants.Coin.*;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -21,5 +20,11 @@ public class VendingMachineTest {
     public void insertValidCoinNickel(){
         VendingMachine vendingMachine = new VendingMachine();
         assertEquals("$0.05", vendingMachine.insertCoin(new Coin(NICKEL_W, NICKEL_D)));
+    }
+
+    @Test
+    public void insertValidCoinDime(){
+        VendingMachine vendingMachine = new VendingMachine();
+        assertEquals("$0.10", vendingMachine.insertCoin(new Coin(DIME_W, DIME_D)));
     }
 }
