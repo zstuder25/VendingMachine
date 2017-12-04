@@ -12,6 +12,6 @@ public class VendingMachineTest {
     @Test
     public void acceptCoinTest(){
         VendingMachine vendingMachine = new VendingMachine();
-        assertEquals(vendingMachine.giveCoin(new Coin()), "");
+        assertEquals(vendingMachine.giveCoin(new Coin(0, 0)), "");
     }
 }
