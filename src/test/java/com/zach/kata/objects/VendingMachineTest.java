@@ -27,4 +27,10 @@ public class VendingMachineTest {
         VendingMachine vendingMachine = new VendingMachine();
         assertEquals("$0.10", vendingMachine.insertCoin(new Coin(DIME_W, DIME_D)));
     }
+
+    @Test
+    public void insertValidCoinQuarter(){
+        VendingMachine vendingMachine = new VendingMachine();
+        assertEquals("$0.25", vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D)));
+    }
 }

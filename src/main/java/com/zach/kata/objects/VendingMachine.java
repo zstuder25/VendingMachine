@@ -15,6 +15,8 @@ public class VendingMachine {
             return "$0.05";
         }else if(coin.getCoinWeight() == DIME_W && coin.getCoinDiameter() == DIME_D){
             return "$0.10";
+        }else if(coin.getCoinWeight() == QUARTER_W && coin.getCoinDiameter() == QUARTER_D){
+            return "$0.25";
         }
         return "";
     }
