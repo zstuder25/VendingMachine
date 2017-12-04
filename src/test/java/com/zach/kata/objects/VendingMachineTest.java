@@ -39,4 +39,10 @@ public class VendingMachineTest {
         VendingMachine vendingMachine = new VendingMachine();
         assertEquals("INSERT COIN", vendingMachine.insertCoin(new Coin(PENNY_W, PENNY_D)));
     }
+
+    @Test
+    public void insertInvalidCoinUnknown(){
+        VendingMachine vendingMachine = new VendingMachine();
+        assertEquals("INSERT COIN", vendingMachine.insertCoin(new Coin(1, 1)));
+    }
 }
