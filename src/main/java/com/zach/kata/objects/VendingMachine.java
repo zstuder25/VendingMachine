@@ -38,7 +38,11 @@ public class VendingMachine {
             return convertAmount();
         }else{
             rejectedCoins.add(coin);
-            return INSERT_COIN;
+            if(currentAmount == 0){
+                return INSERT_COIN;
+            }else{
+                return  convertAmount();
+            }
         }
     }
 
