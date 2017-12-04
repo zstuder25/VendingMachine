@@ -33,4 +33,10 @@ public class CoinTest {
         Coin dime = new Coin(2.268, 0.705);
         assertEquals("Dime", dime.getCoinName());
     }
+
+    @Test
+    public void makeAQuarterTest(){
+        Coin quarter = new Coin(5.67, 0.955);
+        assertEquals("Quarter", quarter.getCoinName());
+    }
 }

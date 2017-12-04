@@ -14,6 +14,8 @@ public class Coin {
             setCoinName("Nickel");
         }else if(weight == 2.268 && diameter == 0.705){
             setCoinName("Dime");
+        }else if(weight == 5.67 && diameter == 0.955){
+            setCoinName("Quarter");
         }
     }
 
