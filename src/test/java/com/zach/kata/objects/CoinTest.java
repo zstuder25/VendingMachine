@@ -39,4 +39,10 @@ public class CoinTest {
         Coin quarter = new Coin(5.67, 0.955);
         assertEquals("Quarter", quarter.getCoinName());
     }
+
+    @Test
+    public void makeAnInvalidCoin(){
+        Coin unknown = new Coin(10, 1);
+        assertEquals("Unknown", unknown.getCoinName());
+    }
 }
