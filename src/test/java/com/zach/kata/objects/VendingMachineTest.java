@@ -45,4 +45,20 @@ public class VendingMachineTest {
         VendingMachine vendingMachine = new VendingMachine();
         assertEquals("INSERT COIN", vendingMachine.insertCoin(new Coin(1, 1)));
     }
+
+    @Test
+    public void insertMultipleValidCoins(){
+        VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.insertCoin(new Coin(NICKEL_W, NICKEL_D));
+        assertEquals("$0.30", vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D)));
+    }
+
+    @Test
+    public void insertMultipleValidCoins2(){
+        VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.insertCoin(new Coin(DIME_W, DIME_D));
+        vendingMachine.insertCoin(new Coin(DIME_W, DIME_D));
+        vendingMachine.insertCoin(new Coin(NICKEL_W, NICKEL_D));
+        assertEquals("$0.50", vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D)));
+    }
 }

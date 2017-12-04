@@ -21,4 +21,8 @@ public interface Constants {
         Double QUARTER_W = 5.670;
         Double QUARTER_D = 0.955;
     }
+
+    interface VendingMachine {
+        String INSERT_COIN = "INSERT COIN";
+    }
 }
