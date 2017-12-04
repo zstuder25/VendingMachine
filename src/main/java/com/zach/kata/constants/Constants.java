@@ -6,12 +6,6 @@ package com.zach.kata.constants;
 public interface Constants {
 
     interface Coin {
-        String PENNY = "Penny";
-        String NICKEL = "Nickel";
-        String DIME = "Dime";
-        String QUARTER = "Quarter";
-        String UNKNOWN = "Unknown";
-
         double PENNY_W = 2.500;
         double PENNY_D = 0.750;
         double NICKEL_W = 5.000;
