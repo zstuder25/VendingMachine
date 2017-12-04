@@ -52,5 +52,6 @@ public class VendingMachine {
 
     public void clear(){
         currentAmount = 0;
+        rejectedCoins.clear();
     }
 }
