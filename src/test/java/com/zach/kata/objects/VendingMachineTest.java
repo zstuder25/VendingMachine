@@ -84,4 +84,14 @@ public class VendingMachineTest {
         assertEquals("$0.15", vendingMachine.insertCoin(new Coin(PENNY_W, PENNY_D)));
         assertEquals(PENNY_W, vendingMachine.getRejectedCoins().get(0).getCoinWeight(), 0.001);
     }
+
+    @Test
+    public void returnInvalidCoinAndDisplayAmount2(){
+        VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.insertCoin(new Coin(DIME_W, DIME_D));
+        vendingMachine.insertCoin(new Coin(NICKEL_W, NICKEL_D));
+        assertEquals("$0.15", vendingMachine.insertCoin(new Coin(PENNY_W, PENNY_D)));
+        assertEquals(PENNY_W, vendingMachine.getRejectedCoins().get(0).getCoinWeight(), 0.001);
+        assertEquals("$0.40", vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D)));
+    }
 }
