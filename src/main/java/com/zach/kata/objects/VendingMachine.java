@@ -5,7 +5,9 @@ package com.zach.kata.objects;
  */
 public class VendingMachine {
 
-    public String giveCoin(Coin coin){
+
+
+    public String insertCoin(Coin coin){
         return "";
     }
 }
