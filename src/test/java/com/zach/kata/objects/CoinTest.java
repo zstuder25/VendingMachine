@@ -28,4 +28,9 @@ public class CoinTest {
         assertEquals("Nickel", nickel.getCoinName());
     }
 
+    @Test
+    public void makeADimeTest(){
+        Coin dime = new Coin(2.268, 0.705);
+        assertEquals("Dime", dime.getCoinName());
+    }
 }
