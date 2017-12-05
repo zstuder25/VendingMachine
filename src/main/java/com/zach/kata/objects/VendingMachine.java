@@ -91,7 +91,7 @@ public class VendingMachine {
     }
 
     public String getDisplay() {
-        if(display.contains(PRICE)){
+        if(display.contains(PRICE) || display.equals(THANK_YOU)){
             String oldDisplay = display;
             setDisplay(INSERT_COIN);
             return oldDisplay;

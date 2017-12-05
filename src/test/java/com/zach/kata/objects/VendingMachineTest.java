@@ -12,6 +12,7 @@ import static com.zach.kata.constants.Constants.Coin.PENNY_W;
 import static com.zach.kata.constants.Constants.Coin.QUARTER_D;
 import static com.zach.kata.constants.Constants.Coin.QUARTER_W;
 import static com.zach.kata.constants.Constants.VendingMachine.INSERT_COIN;
+import static com.zach.kata.constants.Constants.VendingMachine.THANK_YOU;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -143,35 +144,47 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void selectColaProductWithNoMoney(){
+    public void selectColaProductWithNoMoneyTest(){
         vendingMachine.selectProduct("COLA");
         assertEquals("PRICE $1.00", vendingMachine.getDisplay());
     }
 
     @Test
-    public void selectChipsProductWithNoMoney(){
+    public void selectChipsProductWithNoMoneyTest(){
         vendingMachine.selectProduct("CHIPS");
         assertEquals("PRICE $0.50", vendingMachine.getDisplay());
     }
 
     @Test
-    public void selectCandyProductWithNoMoney(){
+    public void selectCandyProductWithNoMoneyTest(){
         vendingMachine.selectProduct("CANDY");
         assertEquals("PRICE $0.65", vendingMachine.getDisplay());
     }
 
     @Test
-    public void selectChipsWithMoney(){
+    public void selectChipsWithMoneyTest(){
         vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D));
         vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D));
         vendingMachine.selectProduct("CHIPS");
         assertEquals("THANK YOU", vendingMachine.getDisplay());
+        vendingMachine.clear();
     }
 
     @Test
-    public void selectCandyProductWithNoMoneyAndCheckDisplayTwice(){
+    public void selectCandyProductWithNoMoneyAndCheckDisplayTwiceTest(){
         vendingMachine.selectProduct("COLA");
         assertEquals("PRICE $1.00", vendingMachine.getDisplay());
+        assertEquals(INSERT_COIN, vendingMachine.getDisplay());
+    }
+
+    @Test
+    public void selectColaWithSufficientMoneyAndCheckDisplayTwiceTest(){
+        vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D));
+        vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D));
+        vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D));
+        vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D));
+        vendingMachine.selectProduct("COLA");
+        assertEquals(THANK_YOU, vendingMachine.getDisplay());
         assertEquals(INSERT_COIN, vendingMachine.getDisplay());
     }
 }
