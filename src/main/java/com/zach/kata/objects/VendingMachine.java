@@ -26,15 +26,13 @@ public class VendingMachine {
     private String display;
 
     private enum Products {
-        COLA("Cola", 1.00),
-        CHIPS("Chips", 0.50),
-        CANDY("CANDY", 0.65);
+        COLA(1.00),
+        CHIPS(0.50),
+        CANDY(0.65);
 
-        private final String name;
         private final double price;
 
-        Products(String name, double price){
-            this.name = name;
+        Products(double price){
             this.price = price;
         }
 
