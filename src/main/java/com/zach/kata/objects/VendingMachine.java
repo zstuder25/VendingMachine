@@ -12,6 +12,7 @@ import static com.zach.kata.constants.Constants.Coin.NICKEL_W;
 import static com.zach.kata.constants.Constants.Coin.QUARTER_D;
 import static com.zach.kata.constants.Constants.Coin.QUARTER_W;
 import static com.zach.kata.constants.Constants.VendingMachine.INSERT_COIN;
+import static com.zach.kata.constants.Constants.VendingMachine.PRICE;
 
 /**
  * Created by zmans on 12/3/2017.
@@ -24,8 +25,27 @@ public class VendingMachine {
     private String selectedProduct;
     private String display;
 
+    private enum Products {
+        COLA("Cola", 1.00),
+        CHIPS("Chips", 0.50);
+
+        private final String name;
+        private final double price;
+
+        Products(String name, double price){
+            this.name = name;
+            this.price = price;
+        }
+
+        public double getPrice(){return price;}
+    }
+
     private String convertAmount(){
         return formatter.format(currentAmount);
+    }
+
+    private String convertAmount(double amount){
+        return formatter.format(amount);
     }
 
     public String insertCoin(Coin coin){
@@ -65,11 +85,10 @@ public class VendingMachine {
         rejectedCoins.clear();
     }
 
-    public void selectProduct(String product) {
+    public String selectProduct(String product) {
         setSelectedProduct(product);
-        if(currentAmount != 1.0){
-            setDisplay("PRICE $1.00");
-        }
+        determineDisplay(product);
+        return getDisplay();
     }
 
     public String getDisplay() {
@@ -78,5 +97,24 @@ public class VendingMachine {
 
     public void setDisplay(String display) {
         this.display = display;
+    }
+
+    private void determineDisplay(String productString){
+        Products product = Products.valueOf(productString);
+        switch (product){
+            case COLA:
+                if(product.getPrice() > currentAmount){
+                    setDisplay(PRICE + convertAmount(product.getPrice()));
+                }
+                break;
+            case CHIPS:
+                if(product.getPrice() > currentAmount){
+                    setDisplay(PRICE + convertAmount(product.getPrice()));
+                }
+                break;
+            default:
+                setDisplay("");
+        }
+
     }
 }

@@ -18,5 +18,6 @@ public interface Constants {
 
     interface VendingMachine {
         String INSERT_COIN = "INSERT COIN";
+        String PRICE = "PRICE ";
     }
 }
