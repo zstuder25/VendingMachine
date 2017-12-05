@@ -12,6 +12,7 @@ import static com.zach.kata.constants.Constants.Coin.PENNY_W;
 import static com.zach.kata.constants.Constants.Coin.QUARTER_D;
 import static com.zach.kata.constants.Constants.Coin.QUARTER_W;
 import static com.zach.kata.constants.Constants.VendingMachine.INSERT_COIN;
+import static com.zach.kata.constants.Constants.VendingMachine.PRICE;
 import static com.zach.kata.constants.Constants.VendingMachine.THANK_YOU;
 import static org.junit.Assert.assertEquals;
 
@@ -197,6 +198,16 @@ public class VendingMachineTest {
         assertEquals(THANK_YOU, vendingMachine.getDisplay());
         assertEquals(INSERT_COIN, vendingMachine.getDisplay());
         assertEquals(0.0, vendingMachine.getCurrentAmount(), 0.001);
+        vendingMachine.clear();
+    }
+
+    @Test
+    public void selectChipsWithoutSufficientMoneyAndCheckDisplayTwiceAndAmountTest(){
+        vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D));
+        vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D));
+        vendingMachine.selectProduct("COLA");
+        assertEquals(PRICE + "$1.00", vendingMachine.getDisplay());
+        assertEquals("$0.50", vendingMachine.getDisplay());
         vendingMachine.clear();
     }
 }
