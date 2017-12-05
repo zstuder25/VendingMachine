@@ -27,7 +27,8 @@ public class VendingMachine {
 
     private enum Products {
         COLA("Cola", 1.00),
-        CHIPS("Chips", 0.50);
+        CHIPS("Chips", 0.50),
+        CANDY("CANDY", 0.65);
 
         private final String name;
         private final double price;
@@ -101,19 +102,8 @@ public class VendingMachine {
 
     private void determineDisplay(String productString){
         Products product = Products.valueOf(productString);
-        switch (product){
-            case COLA:
-                if(product.getPrice() > currentAmount){
-                    setDisplay(PRICE + convertAmount(product.getPrice()));
-                }
-                break;
-            case CHIPS:
-                if(product.getPrice() > currentAmount){
-                    setDisplay(PRICE + convertAmount(product.getPrice()));
-                }
-                break;
-            default:
-                setDisplay("");
+        if(product.getPrice() > currentAmount){
+            setDisplay(PRICE + convertAmount(product.getPrice()));
         }
 
     }
