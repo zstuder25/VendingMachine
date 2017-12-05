@@ -85,13 +85,17 @@ public class VendingMachine {
         rejectedCoins.clear();
     }
 
-    public String selectProduct(String product) {
+    public void selectProduct(String product) {
         setSelectedProduct(product);
         determineDisplay(product);
-        return getDisplay();
     }
 
     public String getDisplay() {
+        if(display.contains(PRICE)){
+            String oldDisplay = display;
+            setDisplay(INSERT_COIN);
+            return oldDisplay;
+        }
         return display;
     }
 
