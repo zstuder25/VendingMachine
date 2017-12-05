@@ -8,6 +8,9 @@ import static com.zach.kata.constants.Constants.Coin.NICKEL;
 import static com.zach.kata.constants.Constants.Coin.PENNY;
 import static com.zach.kata.constants.Constants.Coin.PENNY_W;
 import static com.zach.kata.constants.Constants.Coin.QUARTER;
+import static com.zach.kata.constants.Constants.VendingMachine.CANDY;
+import static com.zach.kata.constants.Constants.VendingMachine.CHIPS;
+import static com.zach.kata.constants.Constants.VendingMachine.COLA;
 import static com.zach.kata.constants.Constants.VendingMachine.INSERT_COIN;
 import static com.zach.kata.constants.Constants.VendingMachine.PRICE;
 import static com.zach.kata.constants.Constants.VendingMachine.THANK_YOU;
@@ -29,7 +32,7 @@ public class VendingMachineTest {
     @Test
     public void acceptCoinTest(){
         vendingMachine.insertCoin(new Coin(0, 0));
-        assertEquals("INSERT COIN", vendingMachine.getDisplay());
+        assertEquals(INSERT_COIN, vendingMachine.getDisplay());
         vendingMachine.clear();
     }
 
@@ -57,14 +60,14 @@ public class VendingMachineTest {
     @Test
     public void insertInvalidCoinPenny(){
         vendingMachine.insertCoin(new Coin(PENNY));
-        assertEquals("INSERT COIN", vendingMachine.getDisplay());
+        assertEquals(INSERT_COIN, vendingMachine.getDisplay());
         vendingMachine.clear();
     }
 
     @Test
     public void insertInvalidCoinUnknown(){
         vendingMachine.insertCoin(new Coin(1, 1));
-        assertEquals("INSERT COIN", vendingMachine.getDisplay());
+        assertEquals(INSERT_COIN, vendingMachine.getDisplay());
         vendingMachine.clear();
     }
 
@@ -151,25 +154,25 @@ public class VendingMachineTest {
     //Feature Select Product Testing
     @Test
     public void selectProductTest(){
-        vendingMachine.selectProduct("COLA");
-        assertEquals("COLA", vendingMachine.getSelectedProduct());
+        vendingMachine.selectProduct(COLA);
+        assertEquals(COLA, vendingMachine.getSelectedProduct());
     }
 
     @Test
     public void selectColaProductWithNoMoneyTest(){
-        vendingMachine.selectProduct("COLA");
+        vendingMachine.selectProduct(COLA);
         assertEquals("PRICE $1.00", vendingMachine.getDisplay());
     }
 
     @Test
     public void selectChipsProductWithNoMoneyTest(){
-        vendingMachine.selectProduct("CHIPS");
+        vendingMachine.selectProduct(CHIPS);
         assertEquals("PRICE $0.50", vendingMachine.getDisplay());
     }
 
     @Test
     public void selectCandyProductWithNoMoneyTest(){
-        vendingMachine.selectProduct("CANDY");
+        vendingMachine.selectProduct(CANDY);
         assertEquals("PRICE $0.65", vendingMachine.getDisplay());
     }
 
@@ -177,14 +180,14 @@ public class VendingMachineTest {
     public void selectChipsWithMoneyTest(){
         vendingMachine.insertCoin(new Coin(QUARTER));
         vendingMachine.insertCoin(new Coin(QUARTER));
-        vendingMachine.selectProduct("CHIPS");
-        assertEquals("THANK YOU", vendingMachine.getDisplay());
+        vendingMachine.selectProduct(CHIPS);
+        assertEquals(THANK_YOU, vendingMachine.getDisplay());
         vendingMachine.clear();
     }
 
     @Test
     public void selectCandyProductWithNoMoneyAndCheckDisplayTwiceTest(){
-        vendingMachine.selectProduct("COLA");
+        vendingMachine.selectProduct(COLA);
         assertEquals("PRICE $1.00", vendingMachine.getDisplay());
         assertEquals(INSERT_COIN, vendingMachine.getDisplay());
     }
@@ -195,7 +198,7 @@ public class VendingMachineTest {
         vendingMachine.insertCoin(new Coin(QUARTER));
         vendingMachine.insertCoin(new Coin(QUARTER));
         vendingMachine.insertCoin(new Coin(QUARTER));
-        vendingMachine.selectProduct("COLA");
+        vendingMachine.selectProduct(COLA);
         assertEquals(THANK_YOU, vendingMachine.getDisplay());
         assertEquals(INSERT_COIN, vendingMachine.getDisplay());
         vendingMachine.clear();
@@ -205,7 +208,7 @@ public class VendingMachineTest {
     public void selectChipsWithSufficientMoneyAndCheckDisplayTwiceAndAmountTest(){
         vendingMachine.insertCoin(new Coin(QUARTER));
         vendingMachine.insertCoin(new Coin(QUARTER));
-        vendingMachine.selectProduct("CHIPS");
+        vendingMachine.selectProduct(CHIPS);
         assertEquals(THANK_YOU, vendingMachine.getDisplay());
         assertEquals(INSERT_COIN, vendingMachine.getDisplay());
         assertEquals(0.0, vendingMachine.getCurrentAmount(), 0.001);
@@ -216,7 +219,7 @@ public class VendingMachineTest {
     public void selectChipsWithoutSufficientMoneyAndCheckDisplayTwiceAndAmountTest(){
         vendingMachine.insertCoin(new Coin(QUARTER));
         vendingMachine.insertCoin(new Coin(QUARTER));
-        vendingMachine.selectProduct("COLA");
+        vendingMachine.selectProduct(COLA);
         assertEquals(PRICE + "$1.00", vendingMachine.getDisplay());
         assertEquals("$0.50", vendingMachine.getDisplay());
         vendingMachine.clear();

@@ -22,6 +22,10 @@ public interface Constants {
     }
 
     interface VendingMachine {
+        String COLA = "COLA";
+        String CHIPS = "CHIPS";
+        String CANDY = "CANDY";
+
         String INSERT_COIN = "INSERT COIN";
         String PRICE = "PRICE ";
         String THANK_YOU = "THANK YOU";
