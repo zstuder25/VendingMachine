@@ -26,6 +26,7 @@ public class VendingMachineTest {
         vendingMachine = new VendingMachine();
     }
 
+    //Feature Accept Coins Testing
     @Test
     public void acceptCoinTest(){
         assertEquals("INSERT COIN", vendingMachine.insertCoin(new Coin(0, 0)));
@@ -132,5 +133,12 @@ public class VendingMachineTest {
         vendingMachine.insertCoin(new Coin(PENNY_W, PENNY_D));
         vendingMachine.clear();
         assertEquals(0, vendingMachine.getRejectedCoins().size());
+    }
+
+    //Feature Select Product Testing
+    @Test
+    public void selectProductTest(){
+        vendingMachine.setSelectedProduct("Cola");
+        assertEquals("Cola", vendingMachine.getSelectedProduct());
     }
 }

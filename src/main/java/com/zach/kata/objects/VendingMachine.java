@@ -21,6 +21,7 @@ public class VendingMachine {
     private double currentAmount = 0;
     private static NumberFormat formatter =  NumberFormat.getCurrencyInstance(new Locale("en", "US"));
     private ArrayList<Coin> rejectedCoins = new ArrayList<Coin>();
+    private String selectedProduct;
 
     private String convertAmount(){
         return formatter.format(currentAmount);
@@ -48,6 +49,14 @@ public class VendingMachine {
 
     public ArrayList<Coin> getRejectedCoins() {
         return rejectedCoins;
+    }
+
+    public void setSelectedProduct(String selectedProduct) {
+        this.selectedProduct = selectedProduct;
+    }
+
+    public String getSelectedProduct() {
+        return selectedProduct;
     }
 
     public void clear(){
