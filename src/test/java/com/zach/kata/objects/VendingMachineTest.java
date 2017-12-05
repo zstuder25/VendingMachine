@@ -31,44 +31,51 @@ public class VendingMachineTest {
     //Feature Accept Coins Testing
     @Test
     public void acceptCoinTest(){
-        assertEquals("INSERT COIN", vendingMachine.insertCoin(new Coin(0, 0)));
+        vendingMachine.insertCoin(new Coin(0, 0));
+        assertEquals("INSERT COIN", vendingMachine.getDisplay());
         vendingMachine.clear();
     }
 
     @Test
     public void insertValidCoinNickel(){
-        assertEquals("$0.05", vendingMachine.insertCoin(new Coin(NICKEL_W, NICKEL_D)));
+        vendingMachine.insertCoin(new Coin(NICKEL_W, NICKEL_D));
+        assertEquals("$0.05", vendingMachine.getDisplay());
         vendingMachine.clear();
     }
 
     @Test
     public void insertValidCoinDime(){
-        assertEquals("$0.10", vendingMachine.insertCoin(new Coin(DIME_W, DIME_D)));
+        vendingMachine.insertCoin(new Coin(DIME_W, DIME_D));
+        assertEquals("$0.10", vendingMachine.getDisplay());
         vendingMachine.clear();
     }
 
     @Test
     public void insertValidCoinQuarter(){
-        assertEquals("$0.25", vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D)));
+        vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D));
+        assertEquals("$0.25", vendingMachine.getDisplay());
         vendingMachine.clear();
     }
 
     @Test
     public void insertInvalidCoinPenny(){
-        assertEquals("INSERT COIN", vendingMachine.insertCoin(new Coin(PENNY_W, PENNY_D)));
+        vendingMachine.insertCoin(new Coin(PENNY_W, PENNY_D));
+        assertEquals("INSERT COIN", vendingMachine.getDisplay());
         vendingMachine.clear();
     }
 
     @Test
     public void insertInvalidCoinUnknown(){
-        assertEquals("INSERT COIN", vendingMachine.insertCoin(new Coin(1, 1)));
+        vendingMachine.insertCoin(new Coin(1, 1));
+        assertEquals("INSERT COIN", vendingMachine.getDisplay());
         vendingMachine.clear();
     }
 
     @Test
     public void insertMultipleValidCoins(){
         vendingMachine.insertCoin(new Coin(NICKEL_W, NICKEL_D));
-        assertEquals("$0.30", vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D)));
+        vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D));
+        assertEquals("$0.30", vendingMachine.getDisplay());
         vendingMachine.clear();
     }
 
@@ -77,7 +84,8 @@ public class VendingMachineTest {
         vendingMachine.insertCoin(new Coin(DIME_W, DIME_D));
         vendingMachine.insertCoin(new Coin(DIME_W, DIME_D));
         vendingMachine.insertCoin(new Coin(NICKEL_W, NICKEL_D));
-        assertEquals("$0.50", vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D)));
+        vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D));
+        assertEquals("$0.50", vendingMachine.getDisplay());
         vendingMachine.clear();
     }
 
@@ -92,7 +100,8 @@ public class VendingMachineTest {
     public void returnInvalidCoinAndDisplayAmount(){
         vendingMachine.insertCoin(new Coin(DIME_W, DIME_D));
         vendingMachine.insertCoin(new Coin(NICKEL_W, NICKEL_D));
-        assertEquals("$0.15", vendingMachine.insertCoin(new Coin(PENNY_W, PENNY_D)));
+        vendingMachine.insertCoin(new Coin(PENNY_W, PENNY_D));
+        assertEquals("$0.15", vendingMachine.getDisplay());
         assertEquals(PENNY_W, vendingMachine.getRejectedCoins().get(0).getCoinWeight(), 0.001);
         vendingMachine.clear();
     }
@@ -101,22 +110,26 @@ public class VendingMachineTest {
     public void returnInvalidCoinAndDisplayAmount2(){
         vendingMachine.insertCoin(new Coin(DIME_W, DIME_D));
         vendingMachine.insertCoin(new Coin(NICKEL_W, NICKEL_D));
-        assertEquals("$0.15", vendingMachine.insertCoin(new Coin(PENNY_W, PENNY_D)));
+        vendingMachine.insertCoin(new Coin(PENNY_W, PENNY_D));
+        assertEquals("$0.15", vendingMachine.getDisplay());
         assertEquals(PENNY_W, vendingMachine.getRejectedCoins().get(0).getCoinWeight(), 0.001);
-        assertEquals("$0.40", vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D)));
+        vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D));
+        assertEquals("$0.40", vendingMachine.getDisplay());
         vendingMachine.clear();
     }
 
     @Test
     public void returnMultipleInvalidCoinsAndDisplayAmountOfValid(){
-        assertEquals(INSERT_COIN, vendingMachine.insertCoin(new Coin(PENNY_W, PENNY_D)));
+        vendingMachine.insertCoin(new Coin(PENNY_W, PENNY_D));
+        assertEquals(INSERT_COIN, vendingMachine.getDisplay());
         vendingMachine.insertCoin(new Coin(DIME_W, DIME_D));
         vendingMachine.insertCoin(new Coin(NICKEL_W, NICKEL_D));
         vendingMachine.insertCoin(new Coin(PENNY_W, PENNY_D));
         vendingMachine.insertCoin(new Coin(0.1, 1.5));
         vendingMachine.insertCoin(new Coin(DIME_W, DIME_D));
         vendingMachine.insertCoin(new Coin(DIME_W, DIME_D));
-        String finalAmount = vendingMachine.insertCoin(new Coin(NICKEL_W, NICKEL_D));
+        vendingMachine.insertCoin(new Coin(NICKEL_W, NICKEL_D));
+        String finalAmount = vendingMachine.getDisplay();
         assertEquals(3, vendingMachine.getRejectedCoins().size());
         assertEquals("$0.40", finalAmount);
         vendingMachine.clear();
@@ -126,7 +139,8 @@ public class VendingMachineTest {
     public void clearInputMethodTest(){
         vendingMachine.insertCoin(new Coin(DIME_W, DIME_D));
         vendingMachine.clear();
-        assertEquals("$0.05", vendingMachine.insertCoin(new Coin(NICKEL_W, NICKEL_D)));
+        vendingMachine.insertCoin(new Coin(NICKEL_W, NICKEL_D));
+        assertEquals("$0.05", vendingMachine.getDisplay());
         vendingMachine.clear();
     }
 

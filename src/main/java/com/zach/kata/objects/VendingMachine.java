@@ -52,23 +52,20 @@ public class VendingMachine {
         return formatter.format(amount);
     }
 
-    public String insertCoin(Coin coin){
+    public void insertCoin(Coin coin){
         if(coin.getCoinWeight() == NICKEL_W && coin.getCoinDiameter() == NICKEL_D){
             currentAmount += 0.05;
-            return convertAmount();
         }else if(coin.getCoinWeight() == DIME_W && coin.getCoinDiameter() == DIME_D){
             currentAmount += 0.10;
-            return convertAmount();
         }else if(coin.getCoinWeight() == QUARTER_W && coin.getCoinDiameter() == QUARTER_D){
             currentAmount += 0.25;
-            return convertAmount();
         }else{
             rejectedCoins.add(coin);
-            if(currentAmount == 0){
-                return INSERT_COIN;
-            }else{
-                return  convertAmount();
-            }
+        }
+        if(currentAmount == 0){
+            setDisplay(INSERT_COIN);
+        }else{
+            setDisplay(convertAmount());
         }
     }
 
