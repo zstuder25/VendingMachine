@@ -13,6 +13,7 @@ import static com.zach.kata.constants.Constants.Coin.QUARTER_D;
 import static com.zach.kata.constants.Constants.Coin.QUARTER_W;
 import static com.zach.kata.constants.Constants.VendingMachine.INSERT_COIN;
 import static com.zach.kata.constants.Constants.VendingMachine.PRICE;
+import static com.zach.kata.constants.Constants.VendingMachine.THANK_YOU;
 
 /**
  * Created by zmans on 12/3/2017.
@@ -94,7 +95,7 @@ public class VendingMachine {
         return display;
     }
 
-    public void setDisplay(String display) {
+    private void setDisplay(String display) {
         this.display = display;
     }
 
@@ -102,6 +103,8 @@ public class VendingMachine {
         Products product = Products.valueOf(productString);
         if(product.getPrice() > currentAmount){
             setDisplay(PRICE + convertAmount(product.getPrice()));
+        }else{
+            setDisplay(THANK_YOU);
         }
 
     }

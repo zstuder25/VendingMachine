@@ -159,4 +159,12 @@ public class VendingMachineTest {
         vendingMachine.selectProduct("CANDY");
         assertEquals("PRICE $0.65", vendingMachine.getDisplay());
     }
+
+    @Test
+    public void selectChipsWithMoney(){
+        vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D));
+        vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D));
+        vendingMachine.selectProduct("CHIPS");
+        assertEquals("THANK YOU", vendingMachine.getDisplay());
+    }
 }

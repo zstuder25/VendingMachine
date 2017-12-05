@@ -19,5 +19,6 @@ public interface Constants {
     interface VendingMachine {
         String INSERT_COIN = "INSERT COIN";
         String PRICE = "PRICE ";
+        String THANK_YOU = "THANK YOU";
     }
 }
