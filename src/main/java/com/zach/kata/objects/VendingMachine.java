@@ -26,6 +26,10 @@ public class VendingMachine {
     private String selectedProduct;
     private String display;
 
+    public double getCurrentAmount() {
+        return currentAmount;
+    }
+
     private enum Products {
         COLA(1.00),
         CHIPS(0.50),
@@ -91,9 +95,14 @@ public class VendingMachine {
     }
 
     public String getDisplay() {
-        if(display.contains(PRICE) || display.equals(THANK_YOU)){
+        if(display.contains(PRICE)){
             String oldDisplay = display;
             setDisplay(INSERT_COIN);
+            return oldDisplay;
+        }else if(display.equals(THANK_YOU)){
+            String oldDisplay = display;
+            setDisplay(INSERT_COIN);
+            currentAmount = 0.0;
             return oldDisplay;
         }
         return display;

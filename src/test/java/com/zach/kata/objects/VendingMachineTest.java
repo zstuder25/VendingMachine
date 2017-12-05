@@ -186,5 +186,17 @@ public class VendingMachineTest {
         vendingMachine.selectProduct("COLA");
         assertEquals(THANK_YOU, vendingMachine.getDisplay());
         assertEquals(INSERT_COIN, vendingMachine.getDisplay());
+        vendingMachine.clear();
+    }
+
+    @Test
+    public void selectChipsWithSufficientMoneyAndCheckDisplayTwiceAndAmountTest(){
+        vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D));
+        vendingMachine.insertCoin(new Coin(QUARTER_W, QUARTER_D));
+        vendingMachine.selectProduct("CHIPS");
+        assertEquals(THANK_YOU, vendingMachine.getDisplay());
+        assertEquals(INSERT_COIN, vendingMachine.getDisplay());
+        assertEquals(0.0, vendingMachine.getCurrentAmount(), 0.001);
+        vendingMachine.clear();
     }
 }
