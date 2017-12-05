@@ -22,6 +22,7 @@ public class VendingMachine {
     private static NumberFormat formatter =  NumberFormat.getCurrencyInstance(new Locale("en", "US"));
     private ArrayList<Coin> rejectedCoins = new ArrayList<Coin>();
     private String selectedProduct;
+    private String display;
 
     private String convertAmount(){
         return formatter.format(currentAmount);
@@ -51,7 +52,7 @@ public class VendingMachine {
         return rejectedCoins;
     }
 
-    public void setSelectedProduct(String selectedProduct) {
+    private void setSelectedProduct(String selectedProduct) {
         this.selectedProduct = selectedProduct;
     }
 
@@ -62,5 +63,20 @@ public class VendingMachine {
     public void clear(){
         currentAmount = 0;
         rejectedCoins.clear();
+    }
+
+    public void selectProduct(String product) {
+        setSelectedProduct(product);
+        if(currentAmount != 1.0){
+            setDisplay("PRICE $1.00");
+        }
+    }
+
+    public String getDisplay() {
+        return display;
+    }
+
+    public void setDisplay(String display) {
+        this.display = display;
     }
 }

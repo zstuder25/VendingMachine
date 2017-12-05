@@ -138,7 +138,13 @@ public class VendingMachineTest {
     //Feature Select Product Testing
     @Test
     public void selectProductTest(){
-        vendingMachine.setSelectedProduct("Cola");
+        vendingMachine.selectProduct("Cola");
         assertEquals("Cola", vendingMachine.getSelectedProduct());
+    }
+
+    @Test
+    public void selectColaProductWithNoMoney(){
+        vendingMachine.selectProduct("Cola");
+        assertEquals("PRICE $1.00", vendingMachine.getDisplay());
     }
 }
