@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static com.zach.kata.constants.Constants.Coin.DIME;
+import static com.zach.kata.constants.Constants.Coin.DIME_W;
 import static com.zach.kata.constants.Constants.Coin.NICKEL;
 import static com.zach.kata.constants.Constants.Coin.PENNY;
 import static com.zach.kata.constants.Constants.Coin.PENNY_W;
@@ -235,5 +236,15 @@ public class VendingMachineTest {
         vendingMachine.selectProduct(CHIPS);
         assertEquals(1, vendingMachine.getReturnedCoins().size());
         assertEquals(QUARTER_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
+    }
+
+    @Test
+    public void selectCandyWith75CentsTest(){
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.selectProduct(CANDY);
+        assertEquals(1, vendingMachine.getReturnedCoins().size());
+        assertEquals(DIME_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
     }
 }

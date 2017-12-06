@@ -5,6 +5,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import static com.zach.kata.constants.Constants.Coin.DIME;
 import static com.zach.kata.constants.Constants.Coin.DIME_D;
 import static com.zach.kata.constants.Constants.Coin.DIME_W;
 import static com.zach.kata.constants.Constants.Coin.NICKEL_D;
@@ -118,11 +119,18 @@ public class VendingMachine {
             setDisplay(THANK_YOU);
             if(product.getPrice() < currentAmount){
                 double remainingAmount = currentAmount - product.getPrice();
-                if(remainingAmount == 0.25){
+                if(isDoubleEqual(remainingAmount, 0.25)){
                     returnedCoins.add(new Coin(QUARTER));
+                }else if(isDoubleEqual(remainingAmount, 0.10)){
+                    returnedCoins.add(new Coin(DIME));
                 }
             }
         }
 
+    }
+
+    public static boolean isDoubleEqual(double d0, double d1) {
+        final double delta = 0.0001;
+        return d0 == d1 ? true : Math.abs(d0 - d1) < delta;
     }
 }
