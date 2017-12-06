@@ -9,6 +9,7 @@ import static com.zach.kata.constants.Constants.Coin.DIME_D;
 import static com.zach.kata.constants.Constants.Coin.DIME_W;
 import static com.zach.kata.constants.Constants.Coin.NICKEL_D;
 import static com.zach.kata.constants.Constants.Coin.NICKEL_W;
+import static com.zach.kata.constants.Constants.Coin.QUARTER;
 import static com.zach.kata.constants.Constants.Coin.QUARTER_D;
 import static com.zach.kata.constants.Constants.Coin.QUARTER_W;
 import static com.zach.kata.constants.Constants.VendingMachine.INSERT_COIN;
@@ -22,7 +23,7 @@ public class VendingMachine {
 
     private double currentAmount = 0;
     private static NumberFormat formatter =  NumberFormat.getCurrencyInstance(new Locale("en", "US"));
-    private ArrayList<Coin> rejectedCoins = new ArrayList<Coin>();
+    private ArrayList<Coin> returnedCoins = new ArrayList<Coin>();
     private String selectedProduct;
     private String display;
 
@@ -60,7 +61,7 @@ public class VendingMachine {
         }else if(coin.getCoinWeight() == QUARTER_W && coin.getCoinDiameter() == QUARTER_D){
             currentAmount += 0.25;
         }else{
-            rejectedCoins.add(coin);
+            returnedCoins.add(coin);
         }
         if(currentAmount == 0){
             setDisplay(INSERT_COIN);
@@ -69,8 +70,8 @@ public class VendingMachine {
         }
     }
 
-    public ArrayList<Coin> getRejectedCoins() {
-        return rejectedCoins;
+    public ArrayList<Coin> getReturnedCoins() {
+        return returnedCoins;
     }
 
     private void setSelectedProduct(String selectedProduct) {
@@ -83,7 +84,7 @@ public class VendingMachine {
 
     public void clear(){
         currentAmount = 0;
-        rejectedCoins.clear();
+        returnedCoins.clear();
     }
 
     public void selectProduct(String product) {
@@ -115,6 +116,12 @@ public class VendingMachine {
             setDisplay(PRICE + convertAmount(product.getPrice()));
         }else{
             setDisplay(THANK_YOU);
+            if(product.getPrice() < currentAmount){
+                double remainingAmount = currentAmount - product.getPrice();
+                if(remainingAmount == 0.25){
+                    returnedCoins.add(new Coin(QUARTER));
+                }
+            }
         }
 
     }

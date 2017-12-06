@@ -8,6 +8,7 @@ import static com.zach.kata.constants.Constants.Coin.NICKEL;
 import static com.zach.kata.constants.Constants.Coin.PENNY;
 import static com.zach.kata.constants.Constants.Coin.PENNY_W;
 import static com.zach.kata.constants.Constants.Coin.QUARTER;
+import static com.zach.kata.constants.Constants.Coin.QUARTER_W;
 import static com.zach.kata.constants.Constants.VendingMachine.CANDY;
 import static com.zach.kata.constants.Constants.VendingMachine.CHIPS;
 import static com.zach.kata.constants.Constants.VendingMachine.COLA;
@@ -92,7 +93,7 @@ public class VendingMachineTest {
     @Test
     public void returnInvalidPennyCoin(){
         vendingMachine.insertCoin(new Coin(PENNY));
-        assertEquals(PENNY_W, vendingMachine.getRejectedCoins().get(0).getCoinWeight(), 0.001);
+        assertEquals(PENNY_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
         vendingMachine.clear();
     }
 
@@ -102,7 +103,7 @@ public class VendingMachineTest {
         vendingMachine.insertCoin(new Coin(NICKEL));
         vendingMachine.insertCoin(new Coin(PENNY));
         assertEquals("$0.15", vendingMachine.getDisplay());
-        assertEquals(PENNY_W, vendingMachine.getRejectedCoins().get(0).getCoinWeight(), 0.001);
+        assertEquals(PENNY_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
         vendingMachine.clear();
     }
 
@@ -112,7 +113,7 @@ public class VendingMachineTest {
         vendingMachine.insertCoin(new Coin(NICKEL));
         vendingMachine.insertCoin(new Coin(PENNY));
         assertEquals("$0.15", vendingMachine.getDisplay());
-        assertEquals(PENNY_W, vendingMachine.getRejectedCoins().get(0).getCoinWeight(), 0.001);
+        assertEquals(PENNY_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
         vendingMachine.insertCoin(new Coin(QUARTER));
         assertEquals("$0.40", vendingMachine.getDisplay());
         vendingMachine.clear();
@@ -130,7 +131,7 @@ public class VendingMachineTest {
         vendingMachine.insertCoin(new Coin(DIME));
         vendingMachine.insertCoin(new Coin(NICKEL));
         String finalAmount = vendingMachine.getDisplay();
-        assertEquals(3, vendingMachine.getRejectedCoins().size());
+        assertEquals(3, vendingMachine.getReturnedCoins().size());
         assertEquals("$0.40", finalAmount);
         vendingMachine.clear();
     }
@@ -148,7 +149,7 @@ public class VendingMachineTest {
     public void clearRejectedCoinsTest(){
         vendingMachine.insertCoin(new Coin(PENNY));
         vendingMachine.clear();
-        assertEquals(0, vendingMachine.getRejectedCoins().size());
+        assertEquals(0, vendingMachine.getReturnedCoins().size());
     }
 
     //Feature Select Product Testing
@@ -223,5 +224,16 @@ public class VendingMachineTest {
         assertEquals(PRICE + "$1.00", vendingMachine.getDisplay());
         assertEquals("$0.50", vendingMachine.getDisplay());
         vendingMachine.clear();
+    }
+
+    //Feature Make Change Testing
+    @Test
+    public void selectChipsWithMoreThanEnoughMoneyTest(){
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.selectProduct(CHIPS);
+        assertEquals(1, vendingMachine.getReturnedCoins().size());
+        assertEquals(QUARTER_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
     }
 }
