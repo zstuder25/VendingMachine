@@ -279,4 +279,21 @@ public class VendingMachineTest {
         assertEquals(DIME_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
         assertEquals(DIME_D, vendingMachine.getReturnedCoins().get(1).getCoinDiameter(), 0.001);
     }
+
+    @Test
+    public void selectCandyWith1Dollar55CentsAndExpectHighestChangeDenominationsTest(){
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(NICKEL));
+        vendingMachine.selectProduct(CANDY);
+        assertEquals(5, vendingMachine.getReturnedCoins().size());
+        assertEquals(QUARTER_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
+        assertEquals(QUARTER_W, vendingMachine.getReturnedCoins().get(2).getCoinWeight(), 0.001);
+        assertEquals(DIME_W, vendingMachine.getReturnedCoins().get(3).getCoinWeight(), 0.001);
+        assertEquals(NICKEL_W, vendingMachine.getReturnedCoins().get(4).getCoinWeight(), 0.001);
+    }
 }
