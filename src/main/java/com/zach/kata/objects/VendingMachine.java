@@ -91,6 +91,10 @@ public class VendingMachine {
         return selectedProduct;
     }
 
+    private void setDisplay(String display) {
+        this.display = display;
+    }
+
     public void clear(){
         currentAmount = BigDecimal.ZERO;
         returnedCoins.clear();
@@ -115,8 +119,19 @@ public class VendingMachine {
         return display;
     }
 
-    private void setDisplay(String display) {
-        this.display = display;
+    private void returnChange(){
+        while(currentAmount.compareTo(BigDecimal.ZERO) > 0){
+            if(currentAmount.compareTo(new BigDecimal(QUARTER_VAL)) >= 0){
+                returnedCoins.add(new Coin(QUARTER));
+                currentAmount = currentAmount.subtract(new BigDecimal(QUARTER_VAL));
+            }else if(currentAmount.compareTo(new BigDecimal(DIME_VAL)) >= 0){
+                returnedCoins.add(new Coin(DIME));
+                currentAmount = currentAmount.subtract(new BigDecimal(DIME_VAL));
+            }else if(currentAmount.compareTo(new BigDecimal(NICKEL_VAL)) >= 0){
+                returnedCoins.add(new Coin(NICKEL));
+                currentAmount = currentAmount.subtract(new BigDecimal(NICKEL_VAL));
+            }
+        }
     }
 
     private void determineDisplay(String productString){
@@ -128,18 +143,7 @@ public class VendingMachine {
             //Make change
             if(currentAmount.compareTo(product.getPrice()) > 0){
                 currentAmount = currentAmount.subtract(product.getPrice());
-                while(currentAmount.compareTo(BigDecimal.ZERO) > 0){
-                    if(currentAmount.compareTo(new BigDecimal(QUARTER_VAL)) >= 0){
-                        returnedCoins.add(new Coin(QUARTER));
-                        currentAmount = currentAmount.subtract(new BigDecimal(QUARTER_VAL));
-                    }else if(currentAmount.compareTo(new BigDecimal(DIME_VAL)) >= 0){
-                        returnedCoins.add(new Coin(DIME));
-                        currentAmount = currentAmount.subtract(new BigDecimal(DIME_VAL));
-                    }else if(currentAmount.compareTo(new BigDecimal(NICKEL_VAL)) >= 0){
-                        returnedCoins.add(new Coin(NICKEL));
-                        currentAmount = currentAmount.subtract(new BigDecimal(NICKEL_VAL));
-                    }
-                }
+                returnChange();
             }
         }
 
