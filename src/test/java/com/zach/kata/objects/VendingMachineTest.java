@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 
 import static com.zach.kata.constants.Constants.Coin.DIME;
+import static com.zach.kata.constants.Constants.Coin.DIME_D;
 import static com.zach.kata.constants.Constants.Coin.DIME_W;
 import static com.zach.kata.constants.Constants.Coin.NICKEL;
 import static com.zach.kata.constants.Constants.Coin.NICKEL_W;
@@ -265,5 +266,17 @@ public class VendingMachineTest {
         assertEquals(QUARTER_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
         assertEquals(NICKEL_W, vendingMachine.getReturnedCoins().get(1).getCoinWeight(), 0.001);
         vendingMachine.clear();
+    }
+
+    @Test
+    public void selectCandyWith85CentsToReturn2DimesTest(){
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(DIME));
+        vendingMachine.selectProduct(CANDY);
+        assertEquals(2, vendingMachine.getReturnedCoins().size());
+        assertEquals(DIME_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
+        assertEquals(DIME_D, vendingMachine.getReturnedCoins().get(1).getCoinDiameter(), 0.001);
     }
 }

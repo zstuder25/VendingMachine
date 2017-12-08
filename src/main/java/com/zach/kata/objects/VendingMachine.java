@@ -128,16 +128,17 @@ public class VendingMachine {
             //Make change
             if(currentAmount.compareTo(product.getPrice()) > 0){
                 currentAmount = currentAmount.subtract(product.getPrice());
-                if(currentAmount.compareTo(new BigDecimal(QUARTER_VAL)) >= 0){
-                    returnedCoins.add(new Coin(QUARTER));
-                    currentAmount = currentAmount.subtract(new BigDecimal(QUARTER_VAL));
-                }
-                if(currentAmount.compareTo(new BigDecimal(DIME_VAL)) >= 0){
-                    returnedCoins.add(new Coin(DIME));
-                    currentAmount = currentAmount.subtract(new BigDecimal(DIME_VAL));
-                }
-                if(currentAmount.compareTo(new BigDecimal(NICKEL_VAL)) >= 0){
-                    returnedCoins.add(new Coin(NICKEL));
+                while(currentAmount.compareTo(BigDecimal.ZERO) > 0){
+                    if(currentAmount.compareTo(new BigDecimal(QUARTER_VAL)) >= 0){
+                        returnedCoins.add(new Coin(QUARTER));
+                        currentAmount = currentAmount.subtract(new BigDecimal(QUARTER_VAL));
+                    }else if(currentAmount.compareTo(new BigDecimal(DIME_VAL)) >= 0){
+                        returnedCoins.add(new Coin(DIME));
+                        currentAmount = currentAmount.subtract(new BigDecimal(DIME_VAL));
+                    }else if(currentAmount.compareTo(new BigDecimal(NICKEL_VAL)) >= 0){
+                        returnedCoins.add(new Coin(NICKEL));
+                        currentAmount = currentAmount.subtract(new BigDecimal(NICKEL_VAL));
+                    }
                 }
             }
         }
