@@ -11,6 +11,10 @@ public interface Constants {
         String DIME = "DIME";
         String QUARTER = "QUARTER";
 
+        String NICKEL_VAL = "0.05";
+        String DIME_VAL = "0.10";
+        String QUARTER_VAL = "0.25";
+
         double PENNY_W = 2.500;
         double PENNY_D = 0.750;
         double NICKEL_W = 5.000;

@@ -3,9 +3,12 @@ package com.zach.kata.objects;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 import static com.zach.kata.constants.Constants.Coin.DIME;
 import static com.zach.kata.constants.Constants.Coin.DIME_W;
 import static com.zach.kata.constants.Constants.Coin.NICKEL;
+import static com.zach.kata.constants.Constants.Coin.NICKEL_W;
 import static com.zach.kata.constants.Constants.Coin.PENNY;
 import static com.zach.kata.constants.Constants.Coin.PENNY_W;
 import static com.zach.kata.constants.Constants.Coin.QUARTER;
@@ -213,7 +216,7 @@ public class VendingMachineTest {
         vendingMachine.selectProduct(CHIPS);
         assertEquals(THANK_YOU, vendingMachine.getDisplay());
         assertEquals(INSERT_COIN, vendingMachine.getDisplay());
-        assertEquals(0.0, vendingMachine.getCurrentAmount(), 0.001);
+        assertEquals(BigDecimal.ZERO, vendingMachine.getCurrentAmount());
         vendingMachine.clear();
     }
 
@@ -236,6 +239,7 @@ public class VendingMachineTest {
         vendingMachine.selectProduct(CHIPS);
         assertEquals(1, vendingMachine.getReturnedCoins().size());
         assertEquals(QUARTER_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
+        vendingMachine.clear();
     }
 
     @Test
@@ -246,5 +250,6 @@ public class VendingMachineTest {
         vendingMachine.selectProduct(CANDY);
         assertEquals(1, vendingMachine.getReturnedCoins().size());
         assertEquals(DIME_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
+        vendingMachine.clear();
     }
 }
