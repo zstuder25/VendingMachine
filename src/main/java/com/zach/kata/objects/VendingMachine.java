@@ -1,16 +1,26 @@
 package com.zach.kata.objects;
 
 
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import static com.zach.kata.constants.Constants.Coin.DIME;
 import static com.zach.kata.constants.Constants.Coin.DIME_D;
+import static com.zach.kata.constants.Constants.Coin.DIME_VAL;
 import static com.zach.kata.constants.Constants.Coin.DIME_W;
+import static com.zach.kata.constants.Constants.Coin.NICKEL;
 import static com.zach.kata.constants.Constants.Coin.NICKEL_D;
+import static com.zach.kata.constants.Constants.Coin.NICKEL_VAL;
 import static com.zach.kata.constants.Constants.Coin.NICKEL_W;
+import static com.zach.kata.constants.Constants.Coin.QUARTER;
 import static com.zach.kata.constants.Constants.Coin.QUARTER_D;
+import static com.zach.kata.constants.Constants.Coin.QUARTER_VAL;
 import static com.zach.kata.constants.Constants.Coin.QUARTER_W;
+import static com.zach.kata.constants.Constants.VendingMachine.CANDY_VAL;
+import static com.zach.kata.constants.Constants.VendingMachine.CHIPS_VAL;
+import static com.zach.kata.constants.Constants.VendingMachine.COLA_VAL;
 import static com.zach.kata.constants.Constants.VendingMachine.INSERT_COIN;
 import static com.zach.kata.constants.Constants.VendingMachine.PRICE;
 import static com.zach.kata.constants.Constants.VendingMachine.THANK_YOU;
@@ -20,57 +30,57 @@ import static com.zach.kata.constants.Constants.VendingMachine.THANK_YOU;
  */
 public class VendingMachine {
 
-    private double currentAmount = 0;
+    private BigDecimal currentAmount = BigDecimal.ZERO.setScale(2, BigDecimal.ROUND_CEILING);
     private static NumberFormat formatter =  NumberFormat.getCurrencyInstance(new Locale("en", "US"));
-    private ArrayList<Coin> rejectedCoins = new ArrayList<Coin>();
+    private ArrayList<Coin> returnedCoins = new ArrayList<Coin>();
     private String selectedProduct;
     private String display;
 
-    public double getCurrentAmount() {
+    public BigDecimal getCurrentAmount() {
         return currentAmount;
     }
 
     private enum Products {
-        COLA(1.00),
-        CHIPS(0.50),
-        CANDY(0.65);
+        COLA(new BigDecimal(COLA_VAL)),
+        CHIPS(new BigDecimal(CHIPS_VAL)),
+        CANDY(new BigDecimal(CANDY_VAL));
 
-        private final double price;
+        private final BigDecimal price;
 
-        Products(double price){
+        Products(BigDecimal price){
             this.price = price;
         }
 
-        public double getPrice(){return price;}
+        public BigDecimal getPrice(){return price;}
     }
 
     private String convertAmount(){
-        return formatter.format(currentAmount);
+        return formatter.format(currentAmount.doubleValue());
     }
 
-    private String convertAmount(double amount){
-        return formatter.format(amount);
+    private String convertAmount(BigDecimal amount){
+        return formatter.format(amount.doubleValue());
     }
 
     public void insertCoin(Coin coin){
         if(coin.getCoinWeight() == NICKEL_W && coin.getCoinDiameter() == NICKEL_D){
-            currentAmount += 0.05;
+            currentAmount = currentAmount.add(new BigDecimal(NICKEL_VAL));
         }else if(coin.getCoinWeight() == DIME_W && coin.getCoinDiameter() == DIME_D){
-            currentAmount += 0.10;
+            currentAmount = currentAmount.add(new BigDecimal(DIME_VAL));
         }else if(coin.getCoinWeight() == QUARTER_W && coin.getCoinDiameter() == QUARTER_D){
-            currentAmount += 0.25;
+            currentAmount = currentAmount.add(new BigDecimal(QUARTER_VAL));
         }else{
-            rejectedCoins.add(coin);
+            returnedCoins.add(coin);
         }
-        if(currentAmount == 0){
+        if(currentAmount.compareTo(BigDecimal.ZERO) == 0){
             setDisplay(INSERT_COIN);
         }else{
             setDisplay(convertAmount());
         }
     }
 
-    public ArrayList<Coin> getRejectedCoins() {
-        return rejectedCoins;
+    public ArrayList<Coin> getReturnedCoins() {
+        return returnedCoins;
     }
 
     private void setSelectedProduct(String selectedProduct) {
@@ -81,9 +91,13 @@ public class VendingMachine {
         return selectedProduct;
     }
 
+    private void setDisplay(String display) {
+        this.display = display;
+    }
+
     public void clear(){
-        currentAmount = 0;
-        rejectedCoins.clear();
+        currentAmount = BigDecimal.ZERO;
+        returnedCoins.clear();
     }
 
     public void selectProduct(String product) {
@@ -94,7 +108,7 @@ public class VendingMachine {
     public String getDisplay() {
         if(display.contains(PRICE)){
             String oldDisplay = display;
-            setDisplay(currentAmount == 0.0 ? INSERT_COIN : convertAmount());
+            setDisplay(currentAmount.compareTo(BigDecimal.ZERO) == 0 ? INSERT_COIN : convertAmount());
             return oldDisplay;
         }else if(display.equals(THANK_YOU)){
             String oldDisplay = display;
@@ -105,16 +119,32 @@ public class VendingMachine {
         return display;
     }
 
-    private void setDisplay(String display) {
-        this.display = display;
+    private void returnChange(){
+        while(currentAmount.compareTo(BigDecimal.ZERO) > 0){
+            if(currentAmount.compareTo(new BigDecimal(QUARTER_VAL)) >= 0){
+                returnedCoins.add(new Coin(QUARTER));
+                currentAmount = currentAmount.subtract(new BigDecimal(QUARTER_VAL));
+            }else if(currentAmount.compareTo(new BigDecimal(DIME_VAL)) >= 0){
+                returnedCoins.add(new Coin(DIME));
+                currentAmount = currentAmount.subtract(new BigDecimal(DIME_VAL));
+            }else if(currentAmount.compareTo(new BigDecimal(NICKEL_VAL)) >= 0){
+                returnedCoins.add(new Coin(NICKEL));
+                currentAmount = currentAmount.subtract(new BigDecimal(NICKEL_VAL));
+            }
+        }
     }
 
     private void determineDisplay(String productString){
         Products product = Products.valueOf(productString);
-        if(product.getPrice() > currentAmount){
+        if(currentAmount.compareTo(product.getPrice()) < 0){
             setDisplay(PRICE + convertAmount(product.getPrice()));
         }else{
             setDisplay(THANK_YOU);
+            //Make change
+            if(currentAmount.compareTo(product.getPrice()) > 0){
+                currentAmount = currentAmount.subtract(product.getPrice());
+                returnChange();
+            }
         }
 
     }

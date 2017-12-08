@@ -37,19 +37,11 @@ public class Coin {
         coinDiameter = diameter;
     }
 
-    public void setCoinWeight(double coinWeight) {
-        this.coinWeight = coinWeight;
-    }
-
     public double getCoinWeight() {
         return coinWeight;
     }
 
     public double getCoinDiameter() {
         return coinDiameter;
-    }
-
-    public void setCoinDiameter(double coinDiameter) {
-        this.coinDiameter = coinDiameter;
     }
 }
