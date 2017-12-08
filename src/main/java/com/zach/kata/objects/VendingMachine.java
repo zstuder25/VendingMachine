@@ -119,7 +119,7 @@ public class VendingMachine {
         return display;
     }
 
-    private void returnChange(){
+    public void returnChange(){
         while(currentAmount.compareTo(BigDecimal.ZERO) > 0){
             if(currentAmount.compareTo(new BigDecimal(QUARTER_VAL)) >= 0){
                 returnedCoins.add(new Coin(QUARTER));

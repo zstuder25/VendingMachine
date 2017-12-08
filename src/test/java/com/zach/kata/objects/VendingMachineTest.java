@@ -296,4 +296,27 @@ public class VendingMachineTest {
         assertEquals(DIME_W, vendingMachine.getReturnedCoins().get(3).getCoinWeight(), 0.001);
         assertEquals(NICKEL_W, vendingMachine.getReturnedCoins().get(4).getCoinWeight(), 0.001);
     }
+
+    //Feature Return Coins Testing
+    @Test
+    public void insertANickelAndReturnItTest(){
+        vendingMachine.insertCoin(new Coin(NICKEL));
+        vendingMachine.returnChange();
+        assertEquals(NICKEL_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
+    }
+
+    public void insert1Dollar15CentsAndReturnItTest(){
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(DIME));
+        vendingMachine.insertCoin(new Coin(NICKEL));
+        vendingMachine.returnChange();
+        assertEquals(6, vendingMachine.getReturnedCoins().size());
+        assertEquals(QUARTER_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
+        assertEquals(QUARTER_W, vendingMachine.getReturnedCoins().get(3).getCoinWeight(), 0.001);
+        assertEquals(DIME_W, vendingMachine.getReturnedCoins().get(4).getCoinWeight(), 0.001);
+        assertEquals(NICKEL_W, vendingMachine.getReturnedCoins().get(5).getCoinWeight(), 0.001);
+    }
 }
