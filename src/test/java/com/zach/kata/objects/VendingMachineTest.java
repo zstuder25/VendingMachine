@@ -305,6 +305,7 @@ public class VendingMachineTest {
         assertEquals(NICKEL_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
     }
 
+    @Test
     public void insert1Dollar15CentsAndReturnItTest(){
         vendingMachine.insertCoin(new Coin(QUARTER));
         vendingMachine.insertCoin(new Coin(QUARTER));
