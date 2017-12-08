@@ -296,4 +296,12 @@ public class VendingMachineTest {
         assertEquals(DIME_W, vendingMachine.getReturnedCoins().get(3).getCoinWeight(), 0.001);
         assertEquals(NICKEL_W, vendingMachine.getReturnedCoins().get(4).getCoinWeight(), 0.001);
     }
+
+    //Feature Return Coins Testing
+    @Test
+    public void insertANickelAndReturnItTest(){
+        vendingMachine.insertCoin(new Coin(NICKEL));
+        vendingMachine.returnChange();
+        assertEquals(NICKEL_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
+    }
 }
