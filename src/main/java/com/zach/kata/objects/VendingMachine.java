@@ -18,6 +18,9 @@ import static com.zach.kata.constants.Constants.Coin.QUARTER;
 import static com.zach.kata.constants.Constants.Coin.QUARTER_D;
 import static com.zach.kata.constants.Constants.Coin.QUARTER_VAL;
 import static com.zach.kata.constants.Constants.Coin.QUARTER_W;
+import static com.zach.kata.constants.Constants.VendingMachine.CANDY_VAL;
+import static com.zach.kata.constants.Constants.VendingMachine.CHIPS_VAL;
+import static com.zach.kata.constants.Constants.VendingMachine.COLA_VAL;
 import static com.zach.kata.constants.Constants.VendingMachine.INSERT_COIN;
 import static com.zach.kata.constants.Constants.VendingMachine.PRICE;
 import static com.zach.kata.constants.Constants.VendingMachine.THANK_YOU;
@@ -38,9 +41,9 @@ public class VendingMachine {
     }
 
     private enum Products {
-        COLA(new BigDecimal("1.00")),
-        CHIPS(new BigDecimal("0.50")),
-        CANDY(new BigDecimal("0.65"));
+        COLA(new BigDecimal(COLA_VAL)),
+        CHIPS(new BigDecimal(CHIPS_VAL)),
+        CANDY(new BigDecimal(CANDY_VAL));
 
         private final BigDecimal price;
 

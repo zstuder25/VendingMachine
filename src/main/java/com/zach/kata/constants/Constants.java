@@ -30,6 +30,10 @@ public interface Constants {
         String CHIPS = "CHIPS";
         String CANDY = "CANDY";
 
+        String COLA_VAL = "1.00";
+        String CHIPS_VAL = "0.50";
+        String CANDY_VAL = "0.65";
+
         String INSERT_COIN = "INSERT COIN";
         String PRICE = "PRICE ";
         String THANK_YOU = "THANK YOU";

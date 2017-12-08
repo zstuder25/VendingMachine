@@ -252,4 +252,18 @@ public class VendingMachineTest {
         assertEquals(DIME_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
         vendingMachine.clear();
     }
+
+    @Test
+    public void selectCandyWith95CentsTest(){
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(QUARTER));
+        vendingMachine.insertCoin(new Coin(DIME));
+        vendingMachine.insertCoin(new Coin(DIME));
+        vendingMachine.selectProduct(CANDY);
+        assertEquals(2, vendingMachine.getReturnedCoins().size());
+        assertEquals(QUARTER_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
+        assertEquals(NICKEL_W, vendingMachine.getReturnedCoins().get(1).getCoinWeight(), 0.001);
+        vendingMachine.clear();
+    }
 }
