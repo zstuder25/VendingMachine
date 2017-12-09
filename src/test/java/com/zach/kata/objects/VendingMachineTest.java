@@ -320,4 +320,14 @@ public class VendingMachineTest {
         assertEquals(DIME_W, vendingMachine.getReturnedCoins().get(4).getCoinWeight(), 0.001);
         assertEquals(NICKEL_W, vendingMachine.getReturnedCoins().get(5).getCoinWeight(), 0.001);
     }
+
+    //Feature Sold Out
+    @Test
+    public void selectItemThatIsSoldOutTest(){
+        VendingMachine vendingMachine2 = new VendingMachine(1, 0, 2);
+        vendingMachine2.insertCoin(new Coin(QUARTER));
+        vendingMachine2.insertCoin(new Coin(QUARTER));
+        vendingMachine2.selectProduct(CHIPS);
+        assertEquals("SOLD OUT", vendingMachine2.getDisplay());
+    }
 }
