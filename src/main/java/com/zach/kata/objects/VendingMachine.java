@@ -121,7 +121,7 @@ public class VendingMachine {
     }
 
     public String getDisplay() {
-        if(display.contains(PRICE)){
+        if(display.contains(PRICE) || display.contains("SOLD OUT")){
             String oldDisplay = display;
             setDisplay(currentAmount.compareTo(BigDecimal.ZERO) == 0 ? INSERT_COIN : convertAmount());
             return oldDisplay;
