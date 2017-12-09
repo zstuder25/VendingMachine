@@ -4,7 +4,9 @@ package com.zach.kata.objects;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import static com.zach.kata.constants.Constants.Coin.DIME;
 import static com.zach.kata.constants.Constants.Coin.DIME_D;
@@ -18,11 +20,15 @@ import static com.zach.kata.constants.Constants.Coin.QUARTER;
 import static com.zach.kata.constants.Constants.Coin.QUARTER_D;
 import static com.zach.kata.constants.Constants.Coin.QUARTER_VAL;
 import static com.zach.kata.constants.Constants.Coin.QUARTER_W;
+import static com.zach.kata.constants.Constants.VendingMachine.CANDY;
 import static com.zach.kata.constants.Constants.VendingMachine.CANDY_VAL;
+import static com.zach.kata.constants.Constants.VendingMachine.CHIPS;
 import static com.zach.kata.constants.Constants.VendingMachine.CHIPS_VAL;
+import static com.zach.kata.constants.Constants.VendingMachine.COLA;
 import static com.zach.kata.constants.Constants.VendingMachine.COLA_VAL;
 import static com.zach.kata.constants.Constants.VendingMachine.INSERT_COIN;
 import static com.zach.kata.constants.Constants.VendingMachine.PRICE;
+import static com.zach.kata.constants.Constants.VendingMachine.SOLD_OUT;
 import static com.zach.kata.constants.Constants.VendingMachine.THANK_YOU;
 
 /**
@@ -30,11 +36,23 @@ import static com.zach.kata.constants.Constants.VendingMachine.THANK_YOU;
  */
 public class VendingMachine {
 
+    VendingMachine(){
+        this(3, 3, 3);
+    }
+
+    VendingMachine(int colaStock, int chipsStock, int candyStock){
+        stock = new HashMap<String, Integer>();
+        stock.put(COLA, colaStock);
+        stock.put(CHIPS, chipsStock);
+        stock.put(CANDY, candyStock);
+    }
+
     private BigDecimal currentAmount = BigDecimal.ZERO.setScale(2, BigDecimal.ROUND_CEILING);
     private static NumberFormat formatter =  NumberFormat.getCurrencyInstance(new Locale("en", "US"));
     private ArrayList<Coin> returnedCoins = new ArrayList<Coin>();
     private String selectedProduct;
     private String display;
+    private Map<String, Integer> stock;
 
     public BigDecimal getCurrentAmount() {
         return currentAmount;
@@ -106,7 +124,7 @@ public class VendingMachine {
     }
 
     public String getDisplay() {
-        if(display.contains(PRICE)){
+        if(display.contains(PRICE) || display.contains("SOLD OUT")){
             String oldDisplay = display;
             setDisplay(currentAmount.compareTo(BigDecimal.ZERO) == 0 ? INSERT_COIN : convertAmount());
             return oldDisplay;
@@ -136,7 +154,9 @@ public class VendingMachine {
 
     private void determineDisplay(String productString){
         Products product = Products.valueOf(productString);
-        if(currentAmount.compareTo(product.getPrice()) < 0){
+        if(stock.get(productString) == 0){
+            setDisplay(SOLD_OUT);
+        }else if(currentAmount.compareTo(product.getPrice()) < 0){
             setDisplay(PRICE + convertAmount(product.getPrice()));
         }else{
             setDisplay(THANK_YOU);

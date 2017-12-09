@@ -19,6 +19,7 @@ import static com.zach.kata.constants.Constants.VendingMachine.CHIPS;
 import static com.zach.kata.constants.Constants.VendingMachine.COLA;
 import static com.zach.kata.constants.Constants.VendingMachine.INSERT_COIN;
 import static com.zach.kata.constants.Constants.VendingMachine.PRICE;
+import static com.zach.kata.constants.Constants.VendingMachine.SOLD_OUT;
 import static com.zach.kata.constants.Constants.VendingMachine.THANK_YOU;
 import static org.junit.Assert.assertEquals;
 
@@ -319,5 +320,34 @@ public class VendingMachineTest {
         assertEquals(QUARTER_W, vendingMachine.getReturnedCoins().get(3).getCoinWeight(), 0.001);
         assertEquals(DIME_W, vendingMachine.getReturnedCoins().get(4).getCoinWeight(), 0.001);
         assertEquals(NICKEL_W, vendingMachine.getReturnedCoins().get(5).getCoinWeight(), 0.001);
+    }
+
+    //Feature Sold Out
+    @Test
+    public void selectItemThatIsSoldOutTest(){
+        VendingMachine vendingMachine2 = new VendingMachine(1, 0, 2);
+        vendingMachine2.insertCoin(new Coin(QUARTER));
+        vendingMachine2.insertCoin(new Coin(QUARTER));
+        vendingMachine2.selectProduct(CHIPS);
+        assertEquals(SOLD_OUT, vendingMachine2.getDisplay());
+
+    }
+
+    @Test
+    public void selectItemAndCheckDisplayAfterSoldOutDisplayTest(){
+        VendingMachine vendingMachine2 = new VendingMachine(1, 0, 2);
+        vendingMachine2.insertCoin(new Coin(QUARTER));
+        vendingMachine2.insertCoin(new Coin(QUARTER));
+        vendingMachine2.selectProduct(CHIPS);
+        assertEquals(SOLD_OUT, vendingMachine2.getDisplay());
+        assertEquals("$0.50", vendingMachine2.getDisplay());
+    }
+
+    @Test
+    public void selectItemAndCheckDisplayAfterSoldOutDisplayWithNoMoneyTest(){
+        VendingMachine vendingMachine2 = new VendingMachine(1, 0, 2);
+        vendingMachine2.selectProduct(CHIPS);
+        assertEquals(SOLD_OUT, vendingMachine2.getDisplay());
+        assertEquals(INSERT_COIN, vendingMachine2.getDisplay());
     }
 }

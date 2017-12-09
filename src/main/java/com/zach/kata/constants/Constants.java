@@ -37,5 +37,6 @@ public interface Constants {
         String INSERT_COIN = "INSERT COIN";
         String PRICE = "PRICE ";
         String THANK_YOU = "THANK YOU";
+        String SOLD_OUT = "SOLD OUT";
     }
 }
