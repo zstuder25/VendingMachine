@@ -36,12 +36,14 @@ import static com.zach.kata.constants.Constants.VendingMachine.THANK_YOU;
 public class VendingMachine {
 
     VendingMachine(){
-
+        this(3, 3, 3);
     }
 
     VendingMachine(int colaStock, int chipsStock, int candyStock){
         stock = new HashMap<String, Integer>();
+        stock.put(COLA, colaStock);
         stock.put(CHIPS, chipsStock);
+        stock.put(CANDY, candyStock);
     }
 
     private BigDecimal currentAmount = BigDecimal.ZERO.setScale(2, BigDecimal.ROUND_CEILING);

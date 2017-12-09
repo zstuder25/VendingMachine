@@ -340,4 +340,12 @@ public class VendingMachineTest {
         assertEquals("SOLD OUT", vendingMachine2.getDisplay());
         assertEquals("$0.50", vendingMachine2.getDisplay());
     }
+
+    @Test
+    public void selectItemAndCheckDisplayAfterSoldOutDisplayWithNoMoneyTest(){
+        VendingMachine vendingMachine2 = new VendingMachine(1, 0, 2);
+        vendingMachine2.selectProduct(CHIPS);
+        assertEquals("SOLD OUT", vendingMachine2.getDisplay());
+        assertEquals(INSERT_COIN, vendingMachine2.getDisplay());
+    }
 }
