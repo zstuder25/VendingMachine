@@ -28,6 +28,7 @@ import static com.zach.kata.constants.Constants.VendingMachine.COLA;
 import static com.zach.kata.constants.Constants.VendingMachine.COLA_VAL;
 import static com.zach.kata.constants.Constants.VendingMachine.INSERT_COIN;
 import static com.zach.kata.constants.Constants.VendingMachine.PRICE;
+import static com.zach.kata.constants.Constants.VendingMachine.SOLD_OUT;
 import static com.zach.kata.constants.Constants.VendingMachine.THANK_YOU;
 
 /**
@@ -154,7 +155,7 @@ public class VendingMachine {
     private void determineDisplay(String productString){
         Products product = Products.valueOf(productString);
         if(stock.get(productString) == 0){
-            setDisplay("SOLD OUT");
+            setDisplay(SOLD_OUT);
         }else if(currentAmount.compareTo(product.getPrice()) < 0){
             setDisplay(PRICE + convertAmount(product.getPrice()));
         }else{
