@@ -323,10 +323,18 @@ public class VendingMachineTest {
         assertEquals(NICKEL_W, vendingMachine.getReturnedCoins().get(5).getCoinWeight(), 0.001);
     }
 
+    @Test
+    public void insertANickelAndReturnItThenCheckDisplayTest(){
+        vendingMachine.insertCoin(new Coin(NICKEL));
+        vendingMachine.returnChange();
+        assertEquals(NICKEL_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
+        assertEquals(INSERT_COIN, vendingMachine.getDisplay());
+    }
+
     //Feature Sold Out
     @Test
     public void selectItemThatIsSoldOutTest(){
-        VendingMachine vendingMachine2 = new VendingMachine(1, 0, 2);
+        VendingMachine vendingMachine2 = new VendingMachine(1, 0, 2, false);
         vendingMachine2.insertCoin(new Coin(QUARTER));
         vendingMachine2.insertCoin(new Coin(QUARTER));
         vendingMachine2.selectProduct(CHIPS);
@@ -336,7 +344,7 @@ public class VendingMachineTest {
 
     @Test
     public void selectItemAndCheckDisplayAfterSoldOutDisplayTest(){
-        VendingMachine vendingMachine2 = new VendingMachine(1, 0, 2);
+        VendingMachine vendingMachine2 = new VendingMachine(1, 0, 2, false);
         vendingMachine2.insertCoin(new Coin(QUARTER));
         vendingMachine2.insertCoin(new Coin(QUARTER));
         vendingMachine2.selectProduct(CHIPS);
@@ -346,7 +354,7 @@ public class VendingMachineTest {
 
     @Test
     public void selectItemAndCheckDisplayAfterSoldOutDisplayWithNoMoneyTest(){
-        VendingMachine vendingMachine2 = new VendingMachine(1, 0, 2);
+        VendingMachine vendingMachine2 = new VendingMachine(1, 0, 2, false);
         vendingMachine2.selectProduct(CHIPS);
         assertEquals(SOLD_OUT, vendingMachine2.getDisplay());
         assertEquals(INSERT_COIN, vendingMachine2.getDisplay());
@@ -359,6 +367,14 @@ public class VendingMachineTest {
     @Test
     public void selectProductWithoutExactChangeTest(){
         VendingMachine vendingMachine2 = new VendingMachine(true);
+        assertEquals(EXACT_CHANGE, vendingMachine2.getDisplay());
+    }
+
+    @Test
+    public void insertANickelAndReturnItThenCheckDisplayForExactChangeTest(){
+        VendingMachine vendingMachine2 = new VendingMachine(true);
+        vendingMachine2.insertCoin(new Coin(NICKEL));
+        vendingMachine2.returnChange();
         assertEquals(EXACT_CHANGE, vendingMachine2.getDisplay());
     }
 }

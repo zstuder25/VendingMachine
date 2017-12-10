@@ -1,0 +1,14 @@
+Zach's Vending Machine
+======================
+This program simulates a vending machine and simulates the features of the Vending Machine Kata.
+There are a few ways to run this project but the preferred way is to use a Maven command as it will run through all the
+unit test and then compile an executable jar file. If you have Maven installed run the following on command line:
+mvn clean install
+After running this command, you will need to run the compiled program. Use the follow command to run the jar:
+java -jar /target/VendingMachine-1.0-SNAPSHOT.jar [exactChange] [(<colaStock> <chipsStock> <candyStock)]
+where exactChange is if you want the machine to only take exact change and the stock arguments are integer amounts
+of each product the machine will have on startup. Note: if you give stock to one product, you must give an amount to all
+
+If you don't have Maven accessible on your machine, I've provided the already compiled jar file for the project.
+To run the jar simply remove the /target from the command so that it looks like this:
+java -jar /VendingMachine-1.0-SNAPSHOT.jar [exactChange] [(<colaStock> <chipsStock> <candyStock)]

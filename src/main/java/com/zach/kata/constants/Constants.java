@@ -40,4 +40,10 @@ public interface Constants {
         String SOLD_OUT = "SOLD OUT";
         String EXACT_CHANGE = "EXACT CHANGE ONLY";
     }
+
+    interface CustomerInteraction{
+        String CHECK = "CHECK";
+        String RETURN = "RETURN";
+        String QUIT = "Q";
+    }
 }

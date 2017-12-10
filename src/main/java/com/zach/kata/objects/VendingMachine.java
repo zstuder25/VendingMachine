@@ -37,14 +37,25 @@ import static com.zach.kata.constants.Constants.VendingMachine.THANK_YOU;
  */
 public class VendingMachine {
 
-    VendingMachine(){
+    public VendingMachine(){
         this(3, 3, 3);
+        defaultDisplay = INSERT_COIN;
+        setDisplay(defaultDisplay);
     }
-    VendingMachine(boolean exactChange){
-        this(3, 3, 3);
-        setDisplay(EXACT_CHANGE);
+    public VendingMachine(boolean exactChange){
+        this(3, 3, 3, exactChange);
     }
-    VendingMachine(int colaStock, int chipsStock, int candyStock){
+    public VendingMachine(int colaStock, int chipsStock, int candyStock, boolean exactChange){
+        this(colaStock, chipsStock, candyStock);
+        if(exactChange){
+            defaultDisplay = EXACT_CHANGE;
+            setDisplay(defaultDisplay);
+        }else{
+            defaultDisplay = INSERT_COIN;
+            setDisplay(defaultDisplay);
+        }
+    }
+    private VendingMachine(int colaStock, int chipsStock, int candyStock){
         stock = new HashMap<String, Integer>();
         stock.put(COLA, colaStock);
         stock.put(CHIPS, chipsStock);
@@ -57,6 +68,7 @@ public class VendingMachine {
     private String selectedProduct;
     private String display;
     private Map<String, Integer> stock;
+    private String defaultDisplay;
 
     public BigDecimal getCurrentAmount() {
         return currentAmount;
@@ -95,7 +107,7 @@ public class VendingMachine {
             returnedCoins.add(coin);
         }
         if(currentAmount.compareTo(BigDecimal.ZERO) == 0){
-            setDisplay(INSERT_COIN);
+            setDisplay(defaultDisplay);
         }else{
             setDisplay(convertAmount());
         }
@@ -130,11 +142,11 @@ public class VendingMachine {
     public String getDisplay() {
         if(display.contains(PRICE) || display.contains(SOLD_OUT)){
             String oldDisplay = display;
-            setDisplay(currentAmount.compareTo(BigDecimal.ZERO) == 0 ? INSERT_COIN : convertAmount());
+            setDisplay(currentAmount.compareTo(BigDecimal.ZERO) == 0 ? defaultDisplay : convertAmount());
             return oldDisplay;
         }else if(display.equals(THANK_YOU)){
             String oldDisplay = display;
-            setDisplay(INSERT_COIN);
+            setDisplay(defaultDisplay);
             clear();
             return oldDisplay;
         }
@@ -154,6 +166,7 @@ public class VendingMachine {
                 currentAmount = currentAmount.subtract(new BigDecimal(NICKEL_VAL));
             }
         }
+        setDisplay(defaultDisplay);
     }
 
     private void determineDisplay(String productString){
@@ -163,12 +176,12 @@ public class VendingMachine {
         }else if(currentAmount.compareTo(product.getPrice()) < 0){
             setDisplay(PRICE + convertAmount(product.getPrice()));
         }else{
-            setDisplay(THANK_YOU);
             //Make change
             if(currentAmount.compareTo(product.getPrice()) > 0){
                 currentAmount = currentAmount.subtract(product.getPrice());
                 returnChange();
             }
+            setDisplay(THANK_YOU);
         }
 
     }
