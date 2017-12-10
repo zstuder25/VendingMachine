@@ -39,28 +39,27 @@ public class VendingMachine {
 
     public VendingMachine(){
         this(3, 3, 3);
+        defaultDisplay = INSERT_COIN;
+        setDisplay(defaultDisplay);
     }
     public VendingMachine(boolean exactChange){
         this(3, 3, 3, exactChange);
-        if(exactChange){
-            defaultDisplay = EXACT_CHANGE;
-            setDisplay(defaultDisplay);
-        }
-    }
-    VendingMachine(int colaStock, int chipsStock, int candyStock){
-        stock = new HashMap<String, Integer>();
-        stock.put(COLA, colaStock);
-        stock.put(CHIPS, chipsStock);
-        stock.put(CANDY, candyStock);
-        defaultDisplay = INSERT_COIN;
-        setDisplay(defaultDisplay);
     }
     public VendingMachine(int colaStock, int chipsStock, int candyStock, boolean exactChange){
         this(colaStock, chipsStock, candyStock);
         if(exactChange){
             defaultDisplay = EXACT_CHANGE;
             setDisplay(defaultDisplay);
+        }else{
+            defaultDisplay = INSERT_COIN;
+            setDisplay(defaultDisplay);
         }
+    }
+    private VendingMachine(int colaStock, int chipsStock, int candyStock){
+        stock = new HashMap<String, Integer>();
+        stock.put(COLA, colaStock);
+        stock.put(CHIPS, chipsStock);
+        stock.put(CANDY, candyStock);
     }
 
     private BigDecimal currentAmount = BigDecimal.ZERO.setScale(2, BigDecimal.ROUND_CEILING);

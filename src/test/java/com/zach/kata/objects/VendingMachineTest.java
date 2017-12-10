@@ -334,7 +334,7 @@ public class VendingMachineTest {
     //Feature Sold Out
     @Test
     public void selectItemThatIsSoldOutTest(){
-        VendingMachine vendingMachine2 = new VendingMachine(1, 0, 2);
+        VendingMachine vendingMachine2 = new VendingMachine(1, 0, 2, false);
         vendingMachine2.insertCoin(new Coin(QUARTER));
         vendingMachine2.insertCoin(new Coin(QUARTER));
         vendingMachine2.selectProduct(CHIPS);
@@ -344,7 +344,7 @@ public class VendingMachineTest {
 
     @Test
     public void selectItemAndCheckDisplayAfterSoldOutDisplayTest(){
-        VendingMachine vendingMachine2 = new VendingMachine(1, 0, 2);
+        VendingMachine vendingMachine2 = new VendingMachine(1, 0, 2, false);
         vendingMachine2.insertCoin(new Coin(QUARTER));
         vendingMachine2.insertCoin(new Coin(QUARTER));
         vendingMachine2.selectProduct(CHIPS);
@@ -354,7 +354,7 @@ public class VendingMachineTest {
 
     @Test
     public void selectItemAndCheckDisplayAfterSoldOutDisplayWithNoMoneyTest(){
-        VendingMachine vendingMachine2 = new VendingMachine(1, 0, 2);
+        VendingMachine vendingMachine2 = new VendingMachine(1, 0, 2, false);
         vendingMachine2.selectProduct(CHIPS);
         assertEquals(SOLD_OUT, vendingMachine2.getDisplay());
         assertEquals(INSERT_COIN, vendingMachine2.getDisplay());
