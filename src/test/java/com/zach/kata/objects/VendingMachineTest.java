@@ -5,23 +5,23 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 
-import static com.zach.kata.constants.Constants.Coin.DIME;
-import static com.zach.kata.constants.Constants.Coin.DIME_D;
-import static com.zach.kata.constants.Constants.Coin.DIME_W;
-import static com.zach.kata.constants.Constants.Coin.NICKEL;
-import static com.zach.kata.constants.Constants.Coin.NICKEL_W;
-import static com.zach.kata.constants.Constants.Coin.PENNY;
-import static com.zach.kata.constants.Constants.Coin.PENNY_W;
-import static com.zach.kata.constants.Constants.Coin.QUARTER;
-import static com.zach.kata.constants.Constants.Coin.QUARTER_W;
-import static com.zach.kata.constants.Constants.VendingMachine.CANDY;
-import static com.zach.kata.constants.Constants.VendingMachine.CHIPS;
-import static com.zach.kata.constants.Constants.VendingMachine.COLA;
-import static com.zach.kata.constants.Constants.VendingMachine.EXACT_CHANGE;
-import static com.zach.kata.constants.Constants.VendingMachine.INSERT_COIN;
-import static com.zach.kata.constants.Constants.VendingMachine.PRICE;
-import static com.zach.kata.constants.Constants.VendingMachine.SOLD_OUT;
-import static com.zach.kata.constants.Constants.VendingMachine.THANK_YOU;
+import static com.zach.kata.constants.Constants.DIME;
+import static com.zach.kata.constants.Constants.DIME_D;
+import static com.zach.kata.constants.Constants.DIME_W;
+import static com.zach.kata.constants.Constants.NICKEL;
+import static com.zach.kata.constants.Constants.NICKEL_W;
+import static com.zach.kata.constants.Constants.PENNY;
+import static com.zach.kata.constants.Constants.PENNY_W;
+import static com.zach.kata.constants.Constants.QUARTER;
+import static com.zach.kata.constants.Constants.QUARTER_W;
+import static com.zach.kata.constants.Constants.CANDY;
+import static com.zach.kata.constants.Constants.CHIPS;
+import static com.zach.kata.constants.Constants.COLA;
+import static com.zach.kata.constants.Constants.EXACT_CHANGE;
+import static com.zach.kata.constants.Constants.INSERT_COIN;
+import static com.zach.kata.constants.Constants.PRICE;
+import static com.zach.kata.constants.Constants.SOLD_OUT;
+import static com.zach.kata.constants.Constants.THANK_YOU;
 import static org.junit.Assert.assertEquals;
 
 /**
