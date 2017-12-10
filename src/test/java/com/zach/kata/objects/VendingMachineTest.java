@@ -323,6 +323,14 @@ public class VendingMachineTest {
         assertEquals(NICKEL_W, vendingMachine.getReturnedCoins().get(5).getCoinWeight(), 0.001);
     }
 
+    @Test
+    public void insertANickelAndReturnItThenCheckDisplayTest(){
+        vendingMachine.insertCoin(new Coin(NICKEL));
+        vendingMachine.returnChange();
+        assertEquals(NICKEL_W, vendingMachine.getReturnedCoins().get(0).getCoinWeight(), 0.001);
+        assertEquals(INSERT_COIN, vendingMachine.getDisplay());
+    }
+
     //Feature Sold Out
     @Test
     public void selectItemThatIsSoldOutTest(){
