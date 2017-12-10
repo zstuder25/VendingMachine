@@ -359,10 +359,6 @@ public class VendingMachineTest {
     @Test
     public void selectProductWithoutExactChangeTest(){
         VendingMachine vendingMachine2 = new VendingMachine(true);
-        vendingMachine2.insertCoin(new Coin(QUARTER));
-        vendingMachine2.insertCoin(new Coin(QUARTER));
-        vendingMachine2.insertCoin(new Coin(QUARTER));
-        vendingMachine2.selectProduct(CANDY);
         assertEquals(EXACT_CHANGE, vendingMachine2.getDisplay());
     }
 }

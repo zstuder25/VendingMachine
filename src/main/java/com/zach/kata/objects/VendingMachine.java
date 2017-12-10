@@ -42,7 +42,7 @@ public class VendingMachine {
     }
     VendingMachine(boolean exactChange){
         this(3, 3, 3);
-        this.exactChange = exactChange;
+        setDisplay(EXACT_CHANGE);
     }
     VendingMachine(int colaStock, int chipsStock, int candyStock){
         stock = new HashMap<String, Integer>();
@@ -57,7 +57,6 @@ public class VendingMachine {
     private String selectedProduct;
     private String display;
     private Map<String, Integer> stock;
-    private boolean exactChange;
 
     public BigDecimal getCurrentAmount() {
         return currentAmount;
@@ -163,8 +162,6 @@ public class VendingMachine {
             setDisplay(SOLD_OUT);
         }else if(currentAmount.compareTo(product.getPrice()) < 0){
             setDisplay(PRICE + convertAmount(product.getPrice()));
-        }else if(exactChange && currentAmount.compareTo(product.getPrice()) != 0){
-            setDisplay(EXACT_CHANGE);
         }else{
             setDisplay(THANK_YOU);
             //Make change
