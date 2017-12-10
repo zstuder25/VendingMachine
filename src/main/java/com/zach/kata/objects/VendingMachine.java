@@ -26,6 +26,7 @@ import static com.zach.kata.constants.Constants.VendingMachine.CHIPS;
 import static com.zach.kata.constants.Constants.VendingMachine.CHIPS_VAL;
 import static com.zach.kata.constants.Constants.VendingMachine.COLA;
 import static com.zach.kata.constants.Constants.VendingMachine.COLA_VAL;
+import static com.zach.kata.constants.Constants.VendingMachine.EXACT_CHANGE;
 import static com.zach.kata.constants.Constants.VendingMachine.INSERT_COIN;
 import static com.zach.kata.constants.Constants.VendingMachine.PRICE;
 import static com.zach.kata.constants.Constants.VendingMachine.SOLD_OUT;
@@ -39,7 +40,10 @@ public class VendingMachine {
     VendingMachine(){
         this(3, 3, 3);
     }
-
+    VendingMachine(boolean exactChange){
+        this(3, 3, 3);
+        setDisplay(EXACT_CHANGE);
+    }
     VendingMachine(int colaStock, int chipsStock, int candyStock){
         stock = new HashMap<String, Integer>();
         stock.put(COLA, colaStock);
@@ -124,7 +128,7 @@ public class VendingMachine {
     }
 
     public String getDisplay() {
-        if(display.contains(PRICE) || display.contains("SOLD OUT")){
+        if(display.contains(PRICE) || display.contains(SOLD_OUT)){
             String oldDisplay = display;
             setDisplay(currentAmount.compareTo(BigDecimal.ZERO) == 0 ? INSERT_COIN : convertAmount());
             return oldDisplay;
