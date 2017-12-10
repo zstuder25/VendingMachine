@@ -369,4 +369,12 @@ public class VendingMachineTest {
         VendingMachine vendingMachine2 = new VendingMachine(true);
         assertEquals(EXACT_CHANGE, vendingMachine2.getDisplay());
     }
+
+    @Test
+    public void insertANickelAndReturnItThenCheckDisplayForExactChangeTest(){
+        VendingMachine vendingMachine2 = new VendingMachine(true);
+        vendingMachine2.insertCoin(new Coin(NICKEL));
+        vendingMachine2.returnChange();
+        assertEquals(EXACT_CHANGE, vendingMachine2.getDisplay());
+    }
 }
