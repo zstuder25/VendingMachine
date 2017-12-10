@@ -38,5 +38,6 @@ public interface Constants {
         String PRICE = "PRICE ";
         String THANK_YOU = "THANK YOU";
         String SOLD_OUT = "SOLD OUT";
+        String EXACT_CHANGE = "EXACT CHANGE ONLY";
     }
 }

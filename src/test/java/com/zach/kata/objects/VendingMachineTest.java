@@ -17,6 +17,7 @@ import static com.zach.kata.constants.Constants.Coin.QUARTER_W;
 import static com.zach.kata.constants.Constants.VendingMachine.CANDY;
 import static com.zach.kata.constants.Constants.VendingMachine.CHIPS;
 import static com.zach.kata.constants.Constants.VendingMachine.COLA;
+import static com.zach.kata.constants.Constants.VendingMachine.EXACT_CHANGE;
 import static com.zach.kata.constants.Constants.VendingMachine.INSERT_COIN;
 import static com.zach.kata.constants.Constants.VendingMachine.PRICE;
 import static com.zach.kata.constants.Constants.VendingMachine.SOLD_OUT;
@@ -349,5 +350,19 @@ public class VendingMachineTest {
         vendingMachine2.selectProduct(CHIPS);
         assertEquals(SOLD_OUT, vendingMachine2.getDisplay());
         assertEquals(INSERT_COIN, vendingMachine2.getDisplay());
+    }
+
+    //I noticed at this point there was no requirement to update the stock after and item had been selected successfully
+    //so in the tradition of TDD I did not code that requirement
+
+    //Exact Change Feature
+    @Test
+    public void selectProductWithoutExactChangeTest(){
+        VendingMachine vendingMachine2 = new VendingMachine(true);
+        vendingMachine2.insertCoin(new Coin(QUARTER));
+        vendingMachine2.insertCoin(new Coin(QUARTER));
+        vendingMachine2.insertCoin(new Coin(QUARTER));
+        vendingMachine2.selectProduct(CANDY);
+        assertEquals(EXACT_CHANGE, vendingMachine2.getDisplay());
     }
 }
