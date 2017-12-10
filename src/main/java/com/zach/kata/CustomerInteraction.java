@@ -10,19 +10,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.zach.kata.constants.Constants.Coin.DIME;
-import static com.zach.kata.constants.Constants.Coin.DIME_W;
-import static com.zach.kata.constants.Constants.Coin.NICKEL;
-import static com.zach.kata.constants.Constants.Coin.NICKEL_W;
-import static com.zach.kata.constants.Constants.Coin.PENNY;
-import static com.zach.kata.constants.Constants.Coin.QUARTER;
-import static com.zach.kata.constants.Constants.Coin.QUARTER_W;
-import static com.zach.kata.constants.Constants.CustomerInteraction.CHECK;
-import static com.zach.kata.constants.Constants.CustomerInteraction.QUIT;
-import static com.zach.kata.constants.Constants.CustomerInteraction.RETURN;
-import static com.zach.kata.constants.Constants.VendingMachine.CANDY;
-import static com.zach.kata.constants.Constants.VendingMachine.CHIPS;
-import static com.zach.kata.constants.Constants.VendingMachine.COLA;
+import static com.zach.kata.constants.Constants.DIME;
+import static com.zach.kata.constants.Constants.DIME_W;
+import static com.zach.kata.constants.Constants.NICKEL;
+import static com.zach.kata.constants.Constants.NICKEL_W;
+import static com.zach.kata.constants.Constants.PENNY;
+import static com.zach.kata.constants.Constants.QUARTER;
+import static com.zach.kata.constants.Constants.QUARTER_W;
+import static com.zach.kata.constants.Constants.CHECK;
+import static com.zach.kata.constants.Constants.QUIT;
+import static com.zach.kata.constants.Constants.RETURN;
+import static com.zach.kata.constants.Constants.CANDY;
+import static com.zach.kata.constants.Constants.CHIPS;
+import static com.zach.kata.constants.Constants.COLA;
 
 /**
  * Created by zmans on 12/3/2017.

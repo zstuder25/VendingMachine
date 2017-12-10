@@ -2,9 +2,9 @@ package com.zach.kata.objects;
 
 import org.junit.Test;
 
-import static com.zach.kata.constants.Constants.Coin.PENNY;
-import static com.zach.kata.constants.Constants.Coin.PENNY_D;
-import static com.zach.kata.constants.Constants.Coin.PENNY_W;
+import static com.zach.kata.constants.Constants.PENNY;
+import static com.zach.kata.constants.Constants.PENNY_D;
+import static com.zach.kata.constants.Constants.PENNY_W;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 
